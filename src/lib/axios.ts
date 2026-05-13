@@ -1,28 +1,43 @@
-import axios from "axios"
+import axios, { AxiosRequestConfig } from "axios"
+
+const apiBaseURL = process.env.NEXT_PUBLIC_API_URL?.trim() ?? ""
+
+if (typeof window !== "undefined" && !apiBaseURL) {
+  console.warn(
+    "NEXT_PUBLIC_API_URL is not defined. API requests will use relative URLs."
+  )
+}
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api",
+  baseURL: apiBaseURL,
   headers: {
     "Content-Type": "application/json",
   },
 })
 
-// Attach JWT token to every request automatically
+const getToken = () => {
+  if (typeof window === "undefined") return null
+  return localStorage.getItem("token")
+}
+
 api.interceptors.request.use((config) => {
   if (typeof window !== "undefined") {
-    const token = localStorage.getItem("token")
+    const token = getToken()
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      if (!config.headers) {
+        config.headers = {} as any
+      }
+      ;(config.headers as Record<string, string>).Authorization = `Bearer ${token}`
     }
   }
   return config
 })
 
-// Handle 401 globally — log user out if token expired
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const status = error?.response?.status
+    if (status === 401 || status === 403) {
       if (typeof window !== "undefined") {
         localStorage.removeItem("token")
         window.location.href = "/auth/login"
