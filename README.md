@@ -32,5 +32,4 @@ Frontend:
 https://devlog-frontend-gamma.vercel.app/
 
 Backend Repository
-
-https://github.com/yourusername/devlog-backend
+https://github.com/shreyav21/devlog-backend
