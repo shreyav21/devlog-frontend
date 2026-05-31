@@ -4,6 +4,7 @@ import "./globals.css"
 import { QueryProvider } from "@/components/shared/QueryProvider"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
+import { PageTransition } from "../components/shared/PageTransition"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,10 +31,10 @@ export default function RootLayout({
       <body className="bg-white text-zinc-900 antialiased font-sans">
         <QueryProvider>
           <Navbar />
-          {children}
+          <PageTransition>{children}</PageTransition>
           <Footer />
         </QueryProvider>
       </body>
     </html>
-  )
+  );
 }

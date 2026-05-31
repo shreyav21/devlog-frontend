@@ -13,6 +13,9 @@ import {
   Loader2, Share2
 } from "lucide-react"
 import { formatDistanceToNow } from "date-fns"
+import { PostChatbot } from "@/components/blog/PostChatbot"
+import { trackPostLike, trackPostRead } from "@/hooks/useRecommendations"
+import { useEffect } from "react"
 
 function readingTime(content: string) {
   return Math.ceil(content.split(" ").length / 200)
@@ -26,13 +29,27 @@ export default function PostDetailPage() {
   const { data: post, isLoading } = usePost(slug)
   const { mutate: likePost, isPending: isLiking } = useLikePost()
 
+  useEffect(() => {
+    if (post) trackPostRead(post);
+  }, [post]);
+
+  // const handleLike = () => {
+  //   if (!isAuthenticated) {
+  //     router.push("/auth/login")
+  //     return
+  //   }
+  //   if (post) likePost(post.id)
+  // }
   const handleLike = () => {
     if (!isAuthenticated) {
-      router.push("/auth/login")
-      return
+      router.push("/auth/login");
+      return;
     }
-    if (post) likePost(post.id)
-  }
+    if (post) {
+      likePost(post.id);
+      trackPostLike(post); // ← add this line
+    }
+  };
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href)
@@ -69,7 +86,6 @@ export default function PostDetailPage() {
 
   return (
     <main className="w-full px-6 pt-28 pb-20">
-
       {/* Back button */}
       <button
         onClick={() => router.back()}
@@ -147,8 +163,10 @@ export default function PostDetailPage() {
       )}
 
       {/* Content */}
-      <div className="prose prose-zinc max-w-none
-      ">
+      <div
+        className="prose prose-zinc max-w-none
+      "
+      >
         <ReactMarkdown remarkPlugins={[remarkGfm]}>
           {post.content}
         </ReactMarkdown>
@@ -200,8 +218,8 @@ export default function PostDetailPage() {
           </div>
         </div>
       </div>
-
+      {/* AI Chatbot */}
+      <PostChatbot postTitle={post.title} postContent={post.content} />
     </main>
-    
-  )
+  );
 }
