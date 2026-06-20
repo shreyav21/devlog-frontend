@@ -28,7 +28,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="bg-white text-zinc-900 antialiased font-sans">
+      <body
+        style={{
+          backgroundColor: "#09090b",
+          color: "white",
+        }}
+      >
         <QueryProvider>
           <Navbar />
           <PageTransition>{children}</PageTransition>

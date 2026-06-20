@@ -53,19 +53,49 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-white/90 backdrop-blur-md border-b border-zinc-100 shadow-sm"
+          ? "bg-[#08110f]/80 backdrop-blur-xl border-b border-emerald-500/10"
           : "bg-transparent",
       )}
     >
+      <div
+        className="
+    absolute
+    inset-0
+    pointer-events-none
+    opacity-50
+  "
+        style={{
+          background:
+            "radial-gradient(circle at 20% 50%, rgba(16,185,129,.08), transparent 25%)",
+        }}
+      />
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-7 h-7 bg-zinc-900 rounded-md flex items-center justify-center">
-                <BookOpen size={14} className="text-white" />
+              <div
+                className="
+    w-8 h-8
+    rounded-lg
+    flex items-center justify-center
+    bg-gradient-to-br
+    from-emerald-500
+    to-teal-500
+    shadow-lg shadow-emerald-500/20
+  "
+              >
+                <BookOpen size={15} className="text-white" />
               </div>
-              <span className="font-serif font-bold text-lg text-zinc-900 tracking-tight">
+
+              <span
+                className="
+    text-xl
+    font-black
+    tracking-tight
+    text-white
+  "
+              >
                 DevLog
               </span>
             </Link>
@@ -84,15 +114,15 @@ export function Navbar() {
                   className={cn(
                     "text-sm font-medium transition-colors duration-200 relative group",
                     pathname === link.href
-                      ? "text-zinc-900"
-                      : "text-zinc-500 hover:text-zinc-900",
+                      ? "text-emerald-400"
+                      : "text-zinc-400 hover:text-white",
                   )}
                 >
                   {link.label}
                   {pathname === link.href && (
                     <motion.div
                       layoutId="nav-underline"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-zinc-900 rounded-full"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full"
                     />
                   )}
                 </Link>
@@ -119,7 +149,11 @@ export function Navbar() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="gap-2 text-zinc-600 hover:text-zinc-900"
+                      className="
+gap-2
+text-zinc-400
+hover:text-emerald-400
+"
                       onClick={() => router.push("/write")}
                     >
                       <PenLine size={15} />
@@ -134,15 +168,34 @@ export function Navbar() {
                         whileTap={{ scale: 0.95 }}
                         className="outline-none"
                       >
-                        <Avatar className="w-8 h-8 cursor-pointer ring-2 ring-transparent hover:ring-zinc-200 transition-all">
+                        <Avatar className="w-8 h-8 cursor-pointer ring-2 ring-transparent hover:ring-emerald-500/30 transition-all">
                           <AvatarImage src={user?.avatarUrl} />
-                          <AvatarFallback className="bg-zinc-900 text-white text-xs font-medium">
+                          <AvatarFallback
+                            className="
+bg-gradient-to-br
+from-emerald-500
+to-teal-500
+text-white
+text-xs
+font-medium
+"
+                          >
                             {user?.name?.charAt(0).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
                       </motion.button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48">
+                    <DropdownMenuContent
+                      align="end"
+                      className="
+    w-56
+    bg-[#0b1210]
+    border
+    border-emerald-500/10
+    text-zinc-300
+    backdrop-blur-xl
+  "
+                    >
                       <div className="px-3 py-2">
                         <p className="text-sm font-medium text-zinc-900">
                           {user?.name}
@@ -193,7 +246,8 @@ export function Navbar() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-zinc-600"
+                      className="text-zinc-400
+hover:text-white"
                       onClick={() => router.push("/auth/login")}
                     >
                       Sign in
@@ -205,7 +259,18 @@ export function Navbar() {
                   >
                     <Button
                       size="sm"
-                      className="bg-zinc-900 hover:bg-zinc-800 text-white rounded-full px-5"
+                      className="
+bg-gradient-to-r
+from-emerald-500
+to-teal-500
+hover:from-emerald-400
+hover:to-teal-400
+text-white
+rounded-full
+px-6
+shadow-lg
+shadow-emerald-500/20
+"
                       onClick={() => router.push("/auth/register")}
                     >
                       Get started
@@ -225,7 +290,15 @@ export function Navbar() {
                 </Button>
               </motion.div>
             </SheetTrigger>
-            <SheetContent side="right" className="w-64 bg-white">
+            <SheetContent
+              side="right"
+              className="
+    w-72
+    bg-[#09090b]
+    border-l
+    border-emerald-500/10
+  "
+            >
               <motion.div
                 initial="hidden"
                 animate="visible"
