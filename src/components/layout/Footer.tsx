@@ -7,16 +7,16 @@ export function Footer() {
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-zinc-900 rounded-md flex items-center justify-center">
+            <div className="w-6 h-6 bg-[var(--bg-secondary)] rounded-md flex items-center justify-center">
               <BookOpen size={12} className="text-white" />
             </div>
             <span className="font-serif font-bold text-zinc-900">DevLog</span>
           </Link>
-          <p className="text-xs text-zinc-400 font-medium">
+          <p className="text-xs text-[var(--text-secondary)] font-medium">
             © {new Date().getFullYear()} DevLog. Built with Next.js + Spring Boot.
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/blog" className="text-xs text-zinc-500 hover:text-zinc-900 transition-colors">
+            <Link href="/blog" className="text-xs text-[var(--text-muted)] hover:text-zinc-900 transition-colors">
               Blog
             </Link>
           </div>

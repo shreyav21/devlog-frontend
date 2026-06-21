@@ -115,7 +115,7 @@ export function Navbar() {
                     "text-sm font-medium transition-colors duration-200 relative group",
                     pathname === link.href
                       ? "text-emerald-400"
-                      : "text-zinc-400 hover:text-white",
+                      : "text-[var(--text-secondary)] hover:text-white",
                   )}
                 >
                   {link.label}
@@ -151,7 +151,7 @@ export function Navbar() {
                       size="sm"
                       className="
 gap-2
-text-zinc-400
+text-[var(--text-secondary)]
 hover:text-emerald-400
 "
                       onClick={() => router.push("/write")}
@@ -200,7 +200,7 @@ font-medium
                         <p className="text-sm font-medium text-zinc-900">
                           {user?.name}
                         </p>
-                        <p className="text-xs text-zinc-500 truncate">
+                        <p className="text-xs text-[var(--text-muted)] truncate">
                           {user?.email}
                         </p>
                       </div>
@@ -246,7 +246,7 @@ font-medium
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-zinc-400
+                      className="text-[var(--text-secondary)]
 hover:text-white"
                       onClick={() => router.push("/auth/login")}
                     >
@@ -402,7 +402,7 @@ shadow-emerald-500/20
                       <Link
                         href="/auth/register"
                         onClick={() => setMobileOpen(false)}
-                        className="px-3 py-2.5 rounded-lg text-sm font-medium bg-zinc-900 text-white text-center rounded-lg block"
+                        className="px-3 py-2.5 rounded-lg text-sm font-medium bg-[var(--bg-secondary)] text-white text-center rounded-lg block"
                       >
                         Get started
                       </Link>

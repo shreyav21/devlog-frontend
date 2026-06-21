@@ -22,7 +22,7 @@ export default function FloatingCards() {
             duration: 4 + i,
             repeat: Infinity,
           }}
-          className="absolute bg-zinc-900/70 backdrop-blur-xl border border-zinc-800 rounded-2xl px-4 py-3 text-zinc-300 text-sm font-mono"
+          className="absolute bg-[var(--bg-secondary)]/70 backdrop-blur-xl border border-[var(--border)] rounded-2xl px-4 py-3 text-zinc-300 text-sm font-mono"
           style={{
             top: `${i * 90}px`,
             left: `${(i % 2) * 100}px`,

@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, PenLine, Users, Zap } from "lucide-react";
-import { motion } from "framer-motion";
-import { useGSAPHeroAnimation } from "@/hooks/useGSAP";
-import { ScrollReveal } from "@/components/shared/ScrollReveal";
-import { staggerContainer, staggerItem } from "@/lib/animations";
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { ArrowRight, PenLine, Users, Zap } from "lucide-react"
+import { motion } from "framer-motion"
+import { useGSAPHeroAnimation } from "@/hooks/useGSAP"
+import { ScrollReveal } from "@/components/shared/ScrollReveal"
+import { staggerContainer, staggerItem } from "@/lib/animations"
 
-import Spotlight from "@/components/ui/Spotlight";
+import Spotlight from "@/components/ui/Spotlight"
 
 export default function HomePage() {
-  useGSAPHeroAnimation();
+  useGSAPHeroAnimation()
 
   return (
     <>
@@ -26,9 +26,9 @@ export default function HomePage() {
             className="absolute inset-0"
             style={{
               background: `
-    radial-gradient(circle at 75% 35%, rgba(16,185,129,0.22), transparent 30%),
-    radial-gradient(circle at 30% 80%, rgba(20,184,166,0.18), transparent 35%),
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.02), transparent 70%)
+    radial-gradient(circle at 75% 35%, rgba(125,145,175,.18), transparent 30%),
+    radial-gradient(circle at 30% 80%, rgba(154,168,191,.14), transparent 35%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.02), transparent 70%)
   `,
             }}
           />
@@ -37,15 +37,21 @@ export default function HomePage() {
             <div className="grid lg:grid-cols-2 gap-16 items-center w-full">
               {/* LEFT CONTENT */}
               <div>
-                <p className="uppercase tracking-[0.4em] text-cyan-400 text-xs mb-6">
+                <p className="uppercase tracking-[0.4em] text-(--accent-primary) text-xs mb-6">
                   Developer Blogging Platform
                 </p>
 
-                <h1 className="text-7xl md:text-8xl font-black text-white leading-none">
+                <h1
+                  className="text-7xl md:text-8xl font-black leading-none"
+                  style={{ color: "var(--text-primary)" }}
+                >
                   DEVLOG
                 </h1>
 
-                <h2 className="text-4xl md:text-5xl mt-6 font-light text-zinc-300 leading-tight">
+                <h2
+                  className="text-4xl md:text-5xl mt-6 font-light  leading-tight"
+                  style={{ color: "var(--text-secondary)" }}
+                >
                   Write.
                   <br />
                   Build.
@@ -53,7 +59,7 @@ export default function HomePage() {
                   Inspire.
                 </h2>
 
-                <p className="mt-8 text-zinc-400 text-lg max-w-xl">
+                <p className="mt-8 text-[var(--text-secondary)] text-lg max-w-xl">
                   A modern platform for developers to publish articles, share
                   knowledge and build their technical presence.
                 </p>
@@ -62,19 +68,11 @@ export default function HomePage() {
                   <Button
                     asChild
                     size="lg"
-                    className="
-  rounded-full
-  px-8
-  bg-gradient-to-r
-  from-emerald-500
-  to-teal-500
-  hover:from-emerald-400
-  hover:to-teal-400
-  text-white
-  border-0
-  shadow-lg
-  shadow-emerald-500/20
-"
+                    className="rounded-full px-8 border-0 text-(--text-muted)]"
+                    style={{
+                      background:
+                        "linear-gradient(135deg,var(--accent-primary),var(--accent-secondary))",
+                    }}
                   >
                     <Link href="/auth/register">Start Writing</Link>
                   </Button>
@@ -82,19 +80,11 @@ export default function HomePage() {
                   <Button
                     asChild
                     size="lg"
-                    className="
-  rounded-full
-  px-8
-  bg-gradient-to-r
-  from-emerald-500
-  to-teal-500
-  hover:from-emerald-400
-  hover:to-teal-400
-  text-white
-  border-0
-  shadow-lg
-  shadow-emerald-500/20
-"
+                    className="rounded-full px-8 text-white border-0"
+                    style={{
+                      background:
+                        "linear-gradient(135deg,var(--accent-primary),var(--accent-secondary))",
+                    }}
                   >
                     <Link href="/blog">Explore Blogs</Link>
                   </Button>
@@ -103,17 +93,17 @@ export default function HomePage() {
                 <div className="flex gap-10 mt-12">
                   <div>
                     <p className="text-3xl font-bold text-white">100+</p>
-                    <p className="text-zinc-500">Articles</p>
+                    <p className="text-[var(--text-muted)]">Articles</p>
                   </div>
 
                   <div>
                     <p className="text-3xl font-bold text-white">50+</p>
-                    <p className="text-zinc-500">Developers</p>
+                    <p className="text-[var(--text-muted)]">Developers</p>
                   </div>
 
                   <div>
                     <p className="text-3xl font-bold text-white">1000+</p>
-                    <p className="text-zinc-500">Reads</p>
+                    <p className="text-[var(--text-muted)]">Reads</p>
                   </div>
                 </div>
               </div>
@@ -150,18 +140,36 @@ export default function HomePage() {
           "
                   style={{
                     background:
-                      "radial-gradient(circle,#06b6d440,transparent 70%)",
+                      "radial-gradient(circle, rgba(125,145,175,.35), transparent 70%)",
                   }}
                 />
 
                 {/* Accent Elements */}
-                <div className="absolute top-20 right-10 w-3 h-3 bg-cyan-400 rounded-full animate-pulse" />
+                <div
+                  className="absolute top-20 right-10 w-3 h-3 rounded-full animate-pulse"
+                  style={{ background: "var(--accent-primary)" }}
+                />
 
-                <div className="absolute bottom-28 left-16 w-2 h-2 bg-violet-400 rounded-full animate-pulse" />
+                <div
+                  className="absolute bottom-28 left-16 w-2 h-2 rounded-full animate-pulse"
+                  style={{ background: "var(--accent-secondary)" }}
+                />
 
-                <div className="absolute top-1/2 right-0 h-px w-40 bg-gradient-to-r from-cyan-400 to-transparent" />
+                <div
+                  className="absolute top-1/2 right-0 h-px w-40"
+                  style={{
+                    background:
+                      "linear-gradient(to right,var(--accent-primary),transparent)",
+                  }}
+                />
 
-                <div className="absolute bottom-20 right-20 h-px w-24 bg-gradient-to-r from-violet-400 to-transparent" />
+                <div
+                  className="absolute bottom-20 right-20 h-px w-24 to-transparent"
+                  style={{
+                    background:
+                      "linear-gradient(to right,var(--accent-secondary),transparent)",
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -205,19 +213,19 @@ export default function HomePage() {
                   y: -8,
                   scale: 1.02,
                 }}
-                className="
-        group
+                className=" group
         relative
         overflow-hidden
         rounded-3xl
         p-8
-        bg-white/[0.03]
         backdrop-blur-xl
         border
-        border-white/[0.06]
         transition-all
-        duration-500
-        "
+        duration-500"
+                style={{
+                  background: "var(--card)",
+                  borderColor: "var(--border)",
+                }}
               >
                 {/* Hover Glow */}
                 <div
@@ -247,15 +255,16 @@ export default function HomePage() {
           flex
           items-center
           justify-center
-          bg-emerald-500/10
-          border
-          border-emerald-500/20
-          text-emerald-400
           mb-6
           group-hover:scale-110
           transition-all
           duration-300
           "
+                  style={{
+                    background: "rgba(125,145,175,.08)",
+                    borderColor: "rgba(125,145,175,.2)",
+                    color: "var(--accent-primary)",
+                  }}
                 >
                   {feature.icon}
                 </div>
@@ -277,28 +286,21 @@ export default function HomePage() {
                   className="
           relative
           z-10
-          text-slate-400
           leading-relaxed
           "
+                  style={{ color: "var(--text-secondary)" }}
                 >
                   {feature.desc}
                 </p>
 
                 {/* Bottom Accent */}
                 <div
-                  className="
-          absolute
-          bottom-0
-          left-0
-          h-[2px]
-          w-0
-          bg-gradient-to-r
-          from-emerald-400
-          to-teal-400
-          group-hover:w-full
-          transition-all
-          duration-500
-          "
+                  className="absolute bottom-0 left-0 h-0.5 w-0 bg-linear-to-r group-hover:w-full transition-all
+          duration-500"
+                  style={{
+                    background:
+                      "linear-gradient(to right,var(--accent-primary),var(--accent-secondary))",
+                  }}
                 />
               </motion.div>
             ))}
@@ -308,7 +310,13 @@ export default function HomePage() {
         {/* CTA */}
         <ScrollReveal>
           <section className="max-w-5xl mx-auto px-6 pb-20">
-            <div className="bg-gradient-to-br from-emerald-950 to-slate-950 rounded-3xl px-10 py-16 text-center overflow-hidden relative">
+            <div
+              className="bg-linear-to-br rounded-3xl px-10 py-16 text-center overflow-hidden relative"
+              style={{
+                background:
+                  "linear-gradient(135deg,var(--bg-secondary),var(--bg-tertiary))",
+              }}
+            >
               {/* Background animation */}
               <motion.div
                 animate={{
@@ -320,14 +328,22 @@ export default function HomePage() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-3xl"
+                className="rounded-full px-8 border"
+                style={{
+                  background: "var(--bg-secondary)",
+                  borderColor: "var(--border)",
+                  color: "var(--text-primary)",
+                }}
               />
 
               <div className="relative z-10">
-                <h2 className="font-serif font-bold text-3xl md:text-4xl text-white mb-4">
+                <h2
+                  className="font-serif font-bold text-3xl md:text-4xl mb-4 text-(--text-muted)"
+                  style={{ color: "var(--text-primary)" }}
+                >
                   Ready to start writing?
                 </h2>
-                <p className="text-zinc-400 mb-8 max-w-md mx-auto">
+                <p className="text-(--text-secondary) mb-8 max-w-md mx-auto">
                   Join developers already sharing their knowledge on DevLog.
                 </p>
                 <motion.div
@@ -349,5 +365,5 @@ export default function HomePage() {
         </ScrollReveal>
       </main>
     </>
-  );
+  )
 }

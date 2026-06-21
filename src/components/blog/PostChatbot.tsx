@@ -233,7 +233,7 @@ export function PostChatbot({ postTitle, postContent }: Props) {
               {/* Suggested questions */}
               {messages.length === 1 && (
                 <div className="px-4 pb-2">
-                  <p className="text-xs text-zinc-400 mb-2">
+                  <p className="text-xs text-[var(--text-secondary)] mb-2">
                     Suggested questions:
                   </p>
                   <div className="flex flex-wrap gap-1.5">

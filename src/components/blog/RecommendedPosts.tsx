@@ -27,13 +27,13 @@ export function RecommendedPosts({ recommendations, isLoading }: Props) {
         <h3 className="font-serif font-bold text-xl text-zinc-900">
           Recommended for you
         </h3>
-        <span className="text-xs text-zinc-400 font-mono bg-zinc-100 px-2 py-0.5 rounded-full">
+        <span className="text-xs text-[var(--text-secondary)] font-mono bg-zinc-100 px-2 py-0.5 rounded-full">
           AI powered
         </span>
       </div>
 
       {isLoading ? (
-        <div className="flex items-center gap-2 text-zinc-400 py-8">
+        <div className="flex items-center gap-2 text-[var(--text-secondary)] py-8">
           <Loader2 size={16} className="animate-spin" />
           <span className="text-sm">Finding posts you'll love...</span>
         </div>

@@ -86,7 +86,7 @@ export function PostCard({ post, featured = false }: Props) {
             </h2>
 
             {/* Excerpt */}
-            <p className="text-sm text-zinc-500 leading-relaxed line-clamp-2 mb-4">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed line-clamp-2 mb-4">
               {post.excerpt}
             </p>
 
@@ -103,14 +103,14 @@ export function PostCard({ post, featured = false }: Props) {
                   {post.authorName}
                 </span>
                 <span className="text-zinc-300">·</span>
-                <span className="text-xs text-zinc-400">
+                <span className="text-xs text-[var(--text-secondary)]">
                   {formatDistanceToNow(new Date(post.createdAt), {
                     addSuffix: true,
                   })}
                 </span>
               </div>
 
-              <div className="flex items-center gap-3 text-zinc-400">
+              <div className="flex items-center gap-3 text-[var(--text-secondary)]">
                 <span className="flex items-center gap-1 text-xs">
                   <Clock size={11} />
                   {readingTime(post.content)}m

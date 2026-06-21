@@ -21,7 +21,7 @@ export function TagFilter ({selected,onChange}:Props){
                 className={cn(
                     "px-4 py-1.5 rounded-full text-sm font font-medium transition-all duration-200",
                     (tag === "All" && selected === "") || selected === tag
-                    ? "bg-zinc-900 text-white"
+                    ? "bg-[var(--bg-secondary)] text-white"
                     : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
                 )}
                 >

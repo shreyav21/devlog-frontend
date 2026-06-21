@@ -59,7 +59,7 @@ export default function PostDetailPage() {
   if (isLoading) {
     return (
       <main className="min-h-screen flex items-center justify-center pt-16">
-        <Loader2 size={24} className="animate-spin text-zinc-400" />
+        <Loader2 size={24} className="animate-spin text-[var(--text-secondary)]" />
       </main>
     )
   }
@@ -74,7 +74,7 @@ export default function PostDetailPage() {
           <Button
             variant="ghost"
             onClick={() => router.push("/blog")}
-            className="text-zinc-500"
+            className="text-[var(--text-muted)]"
           >
             Back to blog
           </Button>
@@ -89,7 +89,7 @@ export default function PostDetailPage() {
       {/* Back button */}
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-900 transition-colors mb-10 group"
+        className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-zinc-900 transition-colors mb-10 group"
       >
         <ArrowLeft
           size={15}
@@ -131,7 +131,7 @@ export default function PostDetailPage() {
             <p className="text-sm font-semibold text-zinc-900">
               {post.authorName}
             </p>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-[var(--text-secondary)]">
               {formatDistanceToNow(new Date(post.createdAt), {
                 addSuffix: true,
               })}
@@ -139,7 +139,7 @@ export default function PostDetailPage() {
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-zinc-400">
+        <div className="flex items-center gap-4 text-[var(--text-secondary)]">
           <span className="flex items-center gap-1.5 text-xs">
             <Clock size={13} />
             {readingTime(post.content)} min read
@@ -212,7 +212,7 @@ export default function PostDetailPage() {
             <p className="font-semibold text-zinc-900 mb-1">
               {post.authorName}
             </p>
-            <p className="text-sm text-zinc-500 leading-relaxed">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed">
               Developer and writer sharing knowledge on DevLog.
             </p>
           </div>

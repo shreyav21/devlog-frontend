@@ -36,7 +36,7 @@ export default function BlogPage() {
             <h1 className="font-serif font-bold text-4xl text-zinc-900 mb-2">
               Articles
             </h1>
-            <p className="text-zinc-500">
+            <p className="text-[var(--text-muted)]">
               Insights, tutorials and stories from the developer community.
             </p>
           </div>
@@ -47,7 +47,7 @@ export default function BlogPage() {
           <div className="relative mb-6">
             <Search
               size={15}
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]"
             />
             <Input
               placeholder="Search articles..."
@@ -68,11 +68,11 @@ export default function BlogPage() {
         {/* Posts */}
         {isLoading ? (
           <div className="flex justify-center py-20">
-            <Loader2 size={24} className="animate-spin text-zinc-400" />
+            <Loader2 size={24} className="animate-spin text-[var(--text-secondary)]" />
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-zinc-400 font-medium">No articles found.</p>
+            <p className="text-[var(--text-secondary)] font-medium">No articles found.</p>
             <p className="text-sm text-zinc-300 mt-1">
               Try a different search or tag.
             </p>

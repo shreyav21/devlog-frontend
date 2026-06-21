@@ -2,58 +2,233 @@
 @import "tailwindcss/theme";
 @import "tailwindcss/utilities";
 
-:root {
-  --bg-primary: #061311;
-  --bg-secondary: #0b1f1b;
+/* =========================
+   THEME VARIABLES
+========================= */
 
-  --card: rgba(14, 28, 25, 0.7);
-  --border: rgba(45, 212, 191, 0.12);
+:root {
+  --bg-primary: #0f1117;
+  --bg-secondary: #161b26;
+  --bg-tertiary: #1f2533;
+
+  --card: rgba(22, 27, 38, 0.7);
+  --border: rgba(125, 145, 175, 0.15);
 
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-secondary: #a8b3c5;
+  --text-muted: #6f7b8f;
 
-  --emerald: #10b981;
-  --teal: #14b8a6;
+  --accent-primary: #7d91af;
+  --accent-secondary: #9aa8bf;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
 }
-@layer base {
 
-  h1, h2, h3 {
+/* =========================
+   BASE
+========================= */
+
+html {
+  background: var(--bg-primary);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(125, 145, 175, 0.10),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(154, 168, 191, 0.08),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      var(--bg-primary) 0%,
+      var(--bg-secondary) 100%
+    );
+
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-serif);
   }
 }
+
+/* =========================
+   UTILITIES
+========================= */
 
 @layer utilities {
   .font-serif {
     font-family: var(--font-serif);
   }
-}
-body {
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(20, 184, 166, 0.08),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at bottom left,
-      rgba(16, 185, 129, 0.08),
-      transparent 35%
-    ),
-    var(--bg-primary);
 
-  color: var(--text-primary);
+  .card-glass {
+    background: var(--card);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(16px);
+  }
+
+  .bg-theme-card {
+    background: var(--card);
+  }
+
+  .border-theme {
+    border-color: var(--border);
+  }
+
+  .text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-muted {
+    color: var(--text-muted);
+  }
+
+  .accent-primary {
+    color: var(--accent-primary);
+  }
+
+  .accent-secondary {
+    color: var(--accent-secondary);
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      90deg,
+      var(--accent-primary),
+      var(--accent-secondary)
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glow-primary {
+    box-shadow:
+      0 0 20px rgba(125, 145, 175, 0.18),
+      0 0 40px rgba(125, 145, 175, 0.08);
+  }
+
+  .glow-secondary {
+    box-shadow:
+      0 0 20px rgba(154, 168, 191, 0.18),
+      0 0 40px rgba(154, 168, 191, 0.08);
+  }
 }
+
+/* =========================
+   GRAIN TEXTURE
+========================= */
 
 .noise {
   position: fixed;
   inset: 0;
+
   pointer-events: none;
   z-index: 1;
 
   background-image:
-    radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    radial-gradient(
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    );
 
-  background-size: 4px 4px;
+  background-size: 3px 3px;
 
-  opacity: 0.3;
+  opacity: 0.18;
+  mix-blend-mode: soft-light;
+}
+
+/* =========================
+   TEXT SELECTION
+========================= */
+
+::selection {
+  background: rgba(125, 145, 175, 0.35);
+  color: white;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   OPTIONAL HERO GRID
+========================= */
+
+.hero-grid {
+  position: relative;
+}
+
+.hero-grid::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  pointer-events: none;
+
+  mask-image: radial-gradient(
+    circle at center,
+    black,
+    transparent 90%
+  );
 }

@@ -90,7 +90,7 @@ export default function WritePage() {
         <div className="flex items-center justify-between mb-8">
           <button
             onClick={() => router.back()}
-            className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+            className="text-sm text-[var(--text-muted)] hover:text-zinc-900 transition-colors"
           >
             ← Back
           </button>
@@ -118,7 +118,7 @@ export default function WritePage() {
               size="sm"
               onClick={handlePublish}
               disabled={isPending}
-              className="gap-2 bg-zinc-900 hover:bg-zinc-800 text-white rounded-full"
+              className="gap-2 bg-[var(--bg-secondary)] hover:bg-zinc-800 text-white rounded-full"
             >
               {isPending ? (
                 <Loader2 size={15} className="animate-spin" />
@@ -150,7 +150,7 @@ export default function WritePage() {
                   {content}
                 </pre>
               ) : (
-                <p className="text-zinc-400">Nothing to preview yet.</p>
+                <p className="text-[var(--text-secondary)]">Nothing to preview yet.</p>
               )}
             </div>
           </div>
@@ -222,7 +222,7 @@ export default function WritePage() {
                     {tag}
                     <button
                       onClick={() => removeTag(tag)}
-                      className="text-zinc-400 hover:text-zinc-700"
+                      className="text-[var(--text-secondary)] hover:text-zinc-700"
                     >
                       <X size={11} />
                     </button>
@@ -237,7 +237,7 @@ export default function WritePage() {
                 disabled={tags.length >= 5}
                 className="h-10 rounded-xl border-zinc-200 bg-zinc-50 text-sm"
               />
-              <p className="text-xs text-zinc-400 mt-1.5">
+              <p className="text-xs text-[var(--text-secondary)] mt-1.5">
                 {tags.length}/5 tags used
               </p>
             </div>

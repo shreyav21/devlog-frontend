@@ -40,7 +40,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-4">
             <Avatar className="w-12 h-12">
               <AvatarImage src={user?.avatarUrl} />
-              <AvatarFallback className="bg-zinc-900 text-white font-semibold">
+              <AvatarFallback className="bg-[var(--bg-secondary)] text-white font-semibold">
                 {user?.name?.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
@@ -48,12 +48,12 @@ export default function DashboardPage() {
               <h1 className="font-serif font-bold text-2xl text-zinc-900">
                 {user?.name}
               </h1>
-              <p className="text-sm text-zinc-500">@{user?.username}</p>
+              <p className="text-sm text-[var(--text-muted)]">@{user?.username}</p>
             </div>
           </div>
           <Button
             onClick={() => router.push("/write")}
-            className="gap-2 bg-zinc-900 hover:bg-zinc-800 text-white rounded-full"
+            className="gap-2 bg-[var(--bg-secondary)] hover:bg-zinc-800 text-white rounded-full"
           >
             <Plus size={15} />
             New post
@@ -72,7 +72,7 @@ export default function DashboardPage() {
               key={stat.label}
               className="p-5 rounded-2xl border border-zinc-100 bg-zinc-50"
             >
-              <div className="flex items-center gap-2 text-zinc-400 mb-2">
+              <div className="flex items-center gap-2 text-[var(--text-secondary)] mb-2">
                 {stat.icon}
                 <span className="text-xs font-medium uppercase tracking-wider">
                   {stat.label}
@@ -93,21 +93,21 @@ export default function DashboardPage() {
 
           {isLoading ? (
             <div className="flex justify-center py-16">
-              <Loader2 size={22} className="animate-spin text-zinc-400" />
+              <Loader2 size={22} className="animate-spin text-[var(--text-secondary)]" />
             </div>
           ) : posts.length === 0 ? (
             <div className="text-center py-16 border border-dashed border-zinc-200 rounded-2xl">
               <FileText size={32} className="text-zinc-300 mx-auto mb-3" />
-              <p className="font-medium text-zinc-500 mb-1">
+              <p className="font-medium text-[var(--text-muted)] mb-1">
                 No articles yet
               </p>
-              <p className="text-sm text-zinc-400 mb-5">
+              <p className="text-sm text-[var(--text-secondary)] mb-5">
                 Write your first article and share it with the world.
               </p>
               <Button
                 onClick={() => router.push("/write")}
                 size="sm"
-                className="bg-zinc-900 text-white rounded-full gap-2"
+                className="bg-[var(--bg-secondary)] text-white rounded-full gap-2"
               >
                 <PenLine size={14} />
                 Write your first post
@@ -127,12 +127,12 @@ export default function DashboardPage() {
                         className={`text-[10px] rounded-full border-0 ${
                           post.status === "PUBLISHED"
                             ? "bg-green-100 text-green-700"
-                            : "bg-zinc-100 text-zinc-500"
+                            : "bg-zinc-100 text-[var(--text-muted)]"
                         }`}
                       >
                         {post.status === "PUBLISHED" ? "Published" : "Draft"}
                       </Badge>
-                      <span className="text-xs text-zinc-400">
+                      <span className="text-xs text-[var(--text-secondary)]">
                         {formatDistanceToNow(new Date(post.createdAt), {
                           addSuffix: true,
                         })}
@@ -141,7 +141,7 @@ export default function DashboardPage() {
                     <h3 className="font-medium text-zinc-900 truncate text-sm">
                       {post.title}
                     </h3>
-                    <div className="flex items-center gap-3 mt-1.5 text-xs text-zinc-400">
+                    <div className="flex items-center gap-3 mt-1.5 text-xs text-[var(--text-secondary)]">
                       <span className="flex items-center gap-1">
                         <Eye size={11} /> {post.views}
                       </span>
@@ -149,7 +149,7 @@ export default function DashboardPage() {
                         <Heart size={11} /> {post.likes}
                       </span>
                       {post.tags.slice(0, 2).map((tag) => (
-                        <span key={tag} className="text-zinc-400">
+                        <span key={tag} className="text-[var(--text-secondary)]">
                           #{tag}
                         </span>
                       ))}
@@ -163,7 +163,7 @@ export default function DashboardPage() {
                         variant="ghost"
                         size="sm"
                         onClick={() => router.push(`/blog/${post.slug}`)}
-                        className="h-8 w-8 p-0 text-zinc-500 hover:text-zinc-900"
+                        className="h-8 w-8 p-0 text-[var(--text-muted)] hover:text-zinc-900"
                       >
                         <Eye size={14} />
                       </Button>
@@ -172,7 +172,7 @@ export default function DashboardPage() {
                       variant="ghost"
                       size="sm"
                       onClick={() => router.push(`/write?edit=${post.id}`)}
-                      className="h-8 w-8 p-0 text-zinc-500 hover:text-zinc-900"
+                      className="h-8 w-8 p-0 text-[var(--text-muted)] hover:text-zinc-900"
                     >
                       <PenLine size={14} />
                     </Button>
@@ -181,7 +181,7 @@ export default function DashboardPage() {
                       size="sm"
                       onClick={() => handleDelete(post.id)}
                       disabled={isDeleting}
-                      className="h-8 w-8 p-0 text-zinc-500 hover:text-red-600"
+                      className="h-8 w-8 p-0 text-[var(--text-muted)] hover:text-red-600"
                     >
                       <Trash2 size={14} />
                     </Button>
