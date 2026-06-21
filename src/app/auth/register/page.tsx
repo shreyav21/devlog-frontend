@@ -25,18 +25,18 @@ export default function RegisterPage() {
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault()
 
-  register(form, {
-    onSuccess: (data) => {
-      console.log("Registered:", data);
-      // redirect or show success
-    },
-    onError: (err: any) => {
-      setError(err.response?.data?.message || "Something went wrong");
-    },
-  });
-};
+    register(form, {
+      onSuccess: (data) => {
+        console.log("Registered:", data)
+        // redirect or show success
+      },
+      onError: (err: any) => {
+        setError(err.response?.data?.message || "Something went wrong")
+      },
+    })
+  }
 
   return (
     <main className="min-h-screen flex items-center justify-center px-6 pt-16">
