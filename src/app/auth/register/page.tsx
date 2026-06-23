@@ -20,9 +20,12 @@ export default function RegisterPage() {
 
   const { mutate: register, isPending } = useRegister()
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
+const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setForm((prev) => ({
+    ...prev,
+    [e.target.name]: e.target.value,
+  }))
+}
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -64,10 +67,13 @@ export default function RegisterPage() {
         </div>
         {/* Heading */}
         <div className="text-center mb-8">
-          <h1 className="font-serif font-bold text-2xl text-zinc-900 mb-1">
+          <h1
+            className="font-serif font-bold text-2xl mb-1"
+            style={{ color: "var(--text-primary)" }}
+          >
             Create your account
           </h1>
-          <p className="text-sm text-[var(--text-muted)]">
+          <p className="text-sm" style={{ color: "var(--text-muted)" }}>
             Start writing and sharing today
           </p>
         </div>
@@ -81,65 +87,147 @@ export default function RegisterPage() {
           )}
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-700">
-              Full name
+            <label
+              className="text-xs font-medium"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Full Name
             </label>
+
             <Input
-              type="name"
+              name="name"
+              type="text"
+              placeholder="John Doe"
               value={form.name}
               onChange={handleChange}
               required
-              className="h-11 rounded-xl bg-transparent border border-(--border) text-(--text-primary) placeholder:text-(--text-muted) focus-visible:border-(--accent-primary) focus-visible:ring-2 focus-visible:ring-(--accent-primary)/20 transition-all "
+              className="
+      h-11
+      rounded-xl
+      bg-transparent
+      border
+      text-white
+      placeholder:text-[var(--text-muted)]
+      focus-visible:ring-2
+      transition-all
+    "
+              style={{
+                borderColor: "var(--border)",
+              }}
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-700">
+            <label
+              className="text-xs font-medium"
+              style={{ color: "var(--text-secondary)" }}
+            >
               Username
             </label>
+
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-(--text-secondary) text-sm">
+              <span
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-sm"
+                style={{ color: "var(--text-secondary)" }}
+              >
                 @
               </span>
+
               <Input
-                type="name"
+                name="username"
+                type="text"
+                placeholder="johndoe"
                 value={form.username}
                 onChange={handleChange}
                 required
-                className="h-11 rounded-xl bg-transparent border border-(--border) text-(--text-primary) placeholder:text-(--text-muted) focus-visible:border-(--accent-primary) focus-visible:ring-2 focus-visible:ring-(--accent-primary)/20 transition-all"
+                className="
+        h-11
+        rounded-xl
+        bg-transparent
+        border
+        text-white
+        placeholder:text-[var(--text-muted)]
+        pl-8
+        focus-visible:ring-2
+        transition-all
+      "
+                style={{
+                  borderColor: "var(--border)",
+                }}
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-700">Email</label>
+            <label
+              className="text-xs font-medium"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              Email
+            </label>
+
             <Input
+              name="email"
               type="email"
               placeholder="you@email.com"
               value={form.email}
               onChange={handleChange}
               required
-              className="h-11 rounded-xl bg-transparent border border-(--border) text-(--text-primary) placeholder:text-(--text-muted) focus-visible:border-(--accent-primary) focus-visible:ring-2 focus-visible:ring-(--accent-primary)/20 transition-all"
+              className="
+      h-11
+      rounded-xl
+      bg-transparent
+      border
+      text-white
+      placeholder:text-[var(--text-muted)]
+      focus-visible:ring-2
+      transition-all
+    "
+              style={{
+                borderColor: "var(--border)",
+              }}
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-zinc-700">
+            <label
+              className="text-xs font-medium"
+              style={{ color: "var(--text-secondary)" }}
+            >
               Password
             </label>
+
             <div className="relative">
               <Input
+                name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 value={form.password}
                 onChange={handleChange}
                 required
-                className="h-11 rounded-xl bg-transparent border border-(--border) text-(--text-primary) placeholder:text-(--text-muted) pr-10 focus-visible:border-(--accent-primary) focus-visible:ring-2 focus-visible:ring-(--accent-primary)/20 transition-all"
+                className="
+        h-11
+        rounded-xl
+        bg-transparent
+        border
+        text-white
+        placeholder:text-[var(--text-muted)]
+        pr-10
+        focus-visible:ring-2
+        transition-all
+      "
+                style={{
+                  borderColor: "var(--border)",
+                }}
               />
+
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-(--text-secondary) hover:text-zinc-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2"
+                style={{
+                  color: "var(--text-secondary)",
+                }}
               >
                 {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
               </button>
@@ -167,11 +255,15 @@ export default function RegisterPage() {
         </form>
 
         {/* Footer */}
-        <p className="text-center text-sm text-(--text-muted) mt-6">
+        <p
+          className="text-center text-sm mt-6"
+          style={{ color: "var(--text-muted)" }}
+        >
           Already have an account?{" "}
           <Link
             href="/auth/login"
-            className="font-medium text-zinc-900 hover:underline"
+            className="font-medium hover:underline"
+            style={{ color: "var(--accent-primary)" }}
           >
             Sign in
           </Link>
