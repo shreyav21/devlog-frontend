@@ -24,30 +24,43 @@ export function PostCard({ post, featured = false }: Props) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -2 }}
+      whileHover={{ y: -4 }}
     >
       <Link href={`/blog/${post.slug}`} className="group block">
         <article
           className={`
-            flex gap-5 p-5 rounded-2xl border border-transparent
-            hover:border-zinc-100 hover:bg-zinc-50/50
-            transition-all duration-200
-            ${featured ? "flex-col" : "flex-col sm:flex-row"}
-          `}
+        flex gap-5 p-5 rounded-3xl border
+        transition-all duration-300
+        backdrop-blur-sm
+
+        ${featured ? "flex-col" : "flex-col sm:flex-row"}
+      `}
+          style={{
+            borderColor: "var(--border)",
+            background: "rgba(255,255,255,0.02)",
+          }}
         >
           {/* Cover image */}
           {post.coverImage && (
             <div
               className={`
-                relative overflow-hidden rounded-xl bg-zinc-100 flex-shrink-0
-                ${featured ? "w-full aspect-[2/1]" : "w-full sm:w-40 h-28"}
-              `}
+            relative overflow-hidden rounded-2xl flex-shrink-0
+            ${featured ? "w-full aspect-[2/1]" : "w-full sm:w-44 h-32"}
+          `}
+              style={{
+                background: "rgba(255,255,255,0.04)",
+              }}
             >
               <Image
                 src={post.coverImage}
                 alt={post.title}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="
+              object-cover
+              transition-transform
+              duration-700
+              group-hover:scale-105
+            "
               />
             </div>
           )}
@@ -56,16 +69,32 @@ export function PostCard({ post, featured = false }: Props) {
           <div className="flex-1 min-w-0">
             {/* Tags */}
             {post.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mb-3">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {post.tags.slice(0, 3).map((tag) => (
                   <motion.div
                     key={tag}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{
+                      y: -2,
+                      scale: 1.05,
+                    }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <Badge
-                      variant="secondary"
-                      className="text-[11px] px-2 py-0 rounded-full font-medium bg-zinc-100 text-zinc-600 hover:bg-zinc-200 border-0 cursor-pointer"
+                      className="
+                    px-3
+                    py-1
+                    rounded-full
+                    border-0
+                    cursor-pointer
+                    text-xs
+                    font-medium
+                    transition-all
+                    duration-300
+                  "
+                      style={{
+                        background: "rgba(125,145,175,0.12)",
+                        color: "var(--accent-primary)",
+                      }}
                     >
                       {tag}
                     </Badge>
@@ -77,54 +106,108 @@ export function PostCard({ post, featured = false }: Props) {
             {/* Title */}
             <h2
               className={`
-                font-serif font-bold text-zinc-900 leading-snug mb-2
-                group-hover:text-zinc-700 transition-colors
-                ${featured ? "text-2xl" : "text-lg"}
-              `}
+            font-serif
+            font-bold
+            leading-snug
+            mb-3
+            transition-colors
+            duration-300
+
+            group-hover:text-[var(--accent-primary)]
+
+            ${featured ? "text-3xl" : "text-xl"}
+          `}
+              style={{
+                color: "var(--text-primary)",
+              }}
             >
               {post.title}
             </h2>
 
             {/* Excerpt */}
-            <p className="text-sm text-[var(--text-muted)] leading-relaxed line-clamp-2 mb-4">
+            <p
+              className="
+            text-sm
+            leading-relaxed
+            line-clamp-2
+            mb-5
+          "
+              style={{
+                color: "var(--text-secondary)",
+              }}
+            >
               {post.excerpt}
             </p>
 
-            {/* Author + meta */}
-            <div className="flex items-center justify-between">
+            {/* Footer */}
+            <div className="flex items-center justify-between flex-wrap gap-3">
               <div className="flex items-center gap-2.5">
-                <Avatar className="w-6 h-6">
+                <Avatar className="w-7 h-7">
                   <AvatarImage src={post.authorAvatar} />
-                  <AvatarFallback className="bg-zinc-200 text-zinc-600 text-[10px]">
+
+                  <AvatarFallback
+                    style={{
+                      background: "rgba(125,145,175,0.15)",
+                      color: "var(--accent-primary)",
+                    }}
+                  >
                     {post.authorName?.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
-                <span className="text-xs font-medium text-zinc-600">
+
+                <span
+                  className="text-sm font-medium"
+                  style={{
+                    color: "var(--text-primary)",
+                  }}
+                >
                   {post.authorName}
                 </span>
-                <span className="text-zinc-300">·</span>
-                <span className="text-xs text-[var(--text-secondary)]">
+
+                <span
+                  style={{
+                    color: "var(--text-muted)",
+                  }}
+                >
+                  •
+                </span>
+
+                <span
+                  className="text-xs"
+                  style={{
+                    color: "var(--text-secondary)",
+                  }}
+                >
                   {formatDistanceToNow(new Date(post.createdAt), {
                     addSuffix: true,
                   })}
                 </span>
               </div>
 
-              <div className="flex items-center gap-3 text-[var(--text-secondary)]">
+              <div
+                className="flex items-center gap-4"
+                style={{
+                  color: "var(--text-secondary)",
+                }}
+              >
                 <span className="flex items-center gap-1 text-xs">
-                  <Clock size={11} />
+                  <Clock size={12} />
                   {readingTime(post.content)}m
                 </span>
+
                 <span className="flex items-center gap-1 text-xs">
-                  <Eye size={11} />
+                  <Eye size={12} />
                   {post.views}
                 </span>
+
                 <motion.span
-                  whileHover={{ scale: 1.2 }}
+                  whileHover={{
+                    scale: 1.15,
+                  }}
                   className="flex items-center gap-1 text-xs"
                 >
                   <Heart
-                    size={11}
+                    size={12}
                     className={
                       post.likedByCurrentUser ? "fill-red-500 text-red-500" : ""
                     }
@@ -137,5 +220,5 @@ export function PostCard({ post, featured = false }: Props) {
         </article>
       </Link>
     </motion.div>
-  );
+  )
 }

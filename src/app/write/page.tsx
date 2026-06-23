@@ -83,168 +83,326 @@ export default function WritePage() {
   }
 
   return (
+    //
     <AuthGuard>
-      <main className="w-full px-6 pt-24 pb-20">
-
-        {/* Toolbar */}
-        <div className="flex items-center justify-between mb-8">
+      <main className="w-full max-w-7xl mx-auto px-8 lg:px-12 pt-24 pb-20">
+        {/* Sticky Toolbar */}
+        <div
+          className="
+      sticky top-20 z-30
+      flex items-center justify-between
+      mb-8
+      rounded-2xl
+      border
+      backdrop-blur-xl
+      px-4 py-3
+    "
+          style={{
+            background: "var(--card)",
+            borderColor: "var(--border)",
+          }}
+        >
           <button
             onClick={() => router.back()}
-            className="text-sm text-[var(--text-muted)] hover:text-zinc-900 transition-colors"
+            className="
+          text-sm
+          text-[var(--text-secondary)]
+          hover:text-[var(--text-primary)]
+          transition-colors
+        "
           >
             ← Back
           </button>
-          <div className="flex items-center gap-2">
+
+          <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setPreview(!preview)}
-              className="gap-2 text-zinc-600"
+              className="text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
             >
               <Eye size={15} />
               {preview ? "Edit" : "Preview"}
             </Button>
+
             <Button
               variant="outline"
               size="sm"
               onClick={handleSaveDraft}
               disabled={isPending}
-              className="gap-2 rounded-full"
+              className="
+            rounded-full
+            border-[var(--border)]
+            text-[var(--text-secondary)]
+          "
             >
               <Save size={15} />
-              Save draft
+              Save Draft
             </Button>
+
             <Button
               size="sm"
               onClick={handlePublish}
               disabled={isPending}
-              className="gap-2 bg-[var(--bg-secondary)] hover:bg-zinc-800 text-white rounded-full"
+              className="
+            rounded-full
+            text-black
+            font-semibold
+            border-0
+          "
+              style={{
+                background:
+                  "linear-gradient(135deg,var(--accent-primary),var(--accent-secondary))",
+              }}
             >
-              {isPending ? (
-                <Loader2 size={15} className="animate-spin" />
-              ) : null}
+              {isPending && <Loader2 size={15} className="animate-spin mr-2" />}
               Publish
             </Button>
           </div>
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-100 text-red-600 text-sm px-4 py-3 rounded-xl mb-6">
+          <div
+            className="
+          mb-6
+          rounded-xl
+          px-4 py-3
+          border
+          text-red-400
+        "
+            style={{
+              background: "rgba(220,38,38,.08)",
+              borderColor: "rgba(220,38,38,.15)",
+            }}
+          >
             {error}
           </div>
         )}
 
         {preview ? (
-          // Preview mode
-          <div>
-            <h1 className="font-serif font-bold text-4xl text-zinc-900 mb-4">
+          <div
+            className="
+          rounded-3xl
+          p-10
+          border
+          backdrop-blur-xl
+        "
+            style={{
+              background: "var(--card)",
+              borderColor: "var(--border)",
+            }}
+          >
+            <h1
+              className="
+            font-serif
+            text-5xl
+            font-black
+            mb-4
+          "
+              style={{
+                color: "var(--text-primary)",
+              }}
+            >
               {title || "Untitled"}
             </h1>
-            <div className="prose prose-zinc max-w-none
-              prose-headings:font-serif
-              prose-code:bg-zinc-100 prose-code:px-1.5 prose-code:rounded
-              prose-pre:bg-zinc-950
-            ">
-              {content ? (
-                <pre className="whitespace-pre-wrap font-sans text-base text-zinc-700 leading-relaxed">
-                  {content}
-                </pre>
-              ) : (
-                <p className="text-[var(--text-secondary)]">Nothing to preview yet.</p>
-              )}
-            </div>
+
+            {excerpt && (
+              <p
+                className="
+              text-xl
+              mb-8
+              italic
+            "
+                style={{
+                  color: "var(--text-secondary)",
+                }}
+              >
+                {excerpt}
+              </p>
+            )}
+
+            <pre
+              className="
+            whitespace-pre-wrap
+            leading-8
+            font-sans
+          "
+              style={{
+                color: "var(--text-primary)",
+              }}
+            >
+              {content || "Nothing to preview yet."}
+            </pre>
           </div>
         ) : (
-          // Edit mode
-          <div className="space-y-6">
+          <div
+            className="
+          rounded-3xl
+          border
+          backdrop-blur-xl
+          overflow-hidden
+        "
+            style={{
+              background: "var(--card)",
+              borderColor: "var(--border)",
+            }}
+          >
+            {/* Editor */}
+            <div className="p-10">
+              {/* Title */}
+              <textarea
+                placeholder="Untitled"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                rows={2}
+                className="
+              w-full
+              bg-transparent
+              border-0
+              resize-none
+              outline-none
 
-            {/* Cover image URL */}
-            <div>
-              <Input
-                placeholder="Cover image URL (optional)"
-                value={coverImage}
-                onChange={(e) => setCoverImage(e.target.value)}
-                className="h-10 rounded-xl border-zinc-200 bg-zinc-50 text-sm"
+              text-5xl
+              md:text-6xl
+              font-black
+              font-serif
+              tracking-tight
+
+              placeholder:text-[var(--text-muted)]
+            "
+                style={{
+                  color: "var(--text-primary)",
+                }}
               />
-              {coverImage && (
-                <div className="mt-3 w-full aspect-[3/1] rounded-xl overflow-hidden bg-zinc-100">
-                  <img
-                    src={coverImage}
-                    alt="Cover"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none"
-                    }}
-                  />
-                </div>
-              )}
+
+              {/* Excerpt */}
+              <textarea
+                placeholder="Write a short description..."
+                value={excerpt}
+                onChange={(e) => setExcerpt(e.target.value)}
+                rows={2}
+                className="
+              mt-4
+              w-full
+              bg-transparent
+              border-0
+              resize-none
+              outline-none
+
+              text-lg
+              italic
+              placeholder:text-[var(--text-muted)]
+            "
+                style={{
+                  color: "var(--text-secondary)",
+                }}
+              />
+
+              <div
+                className="my-8 h-px"
+                style={{
+                  background: "var(--border)",
+                }}
+              />
+
+              {/* Content */}
+              <textarea
+                placeholder="Start writing your story..."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                rows={20}
+                className="
+              w-full
+              min-h-[600px]
+              bg-transparent
+              border-0
+              resize-none
+              outline-none
+
+              text-base
+              leading-8
+
+              placeholder:text-[var(--text-muted)]
+            "
+                style={{
+                  color: "var(--text-primary)",
+                }}
+              />
             </div>
 
-            {/* Title */}
-            <textarea
-              placeholder="Article title..."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              rows={2}
-              className="w-full font-serif font-bold text-4xl text-zinc-900 placeholder:text-zinc-300 resize-none border-0 outline-none bg-transparent leading-tight"
-            />
+            {/* Footer Section */}
+            <div
+              className="border-t p-8"
+              style={{
+                borderColor: "var(--border)",
+              }}
+            >
+              <h3
+                className="mb-4 text-sm font-semibold uppercase tracking-wider"
+                style={{
+                  color: "var(--text-secondary)",
+                }}
+              >
+                Tags
+              </h3>
 
-            {/* Excerpt */}
-            <textarea
-              placeholder="Short description (excerpt)..."
-              value={excerpt}
-              onChange={(e) => setExcerpt(e.target.value)}
-              rows={2}
-              className="w-full text-base text-zinc-600 placeholder:text-zinc-300 resize-none border-0 outline-none bg-transparent leading-relaxed"
-            />
-
-            <div className="border-t border-zinc-100" />
-
-            {/* Content */}
-            <textarea
-              placeholder="Write your article here... (Markdown supported)"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              rows={20}
-              className="w-full text-base text-zinc-700 placeholder:text-zinc-300 resize-none border-0 outline-none bg-transparent leading-relaxed font-mono text-sm"
-            />
-
-            <div className="border-t border-zinc-100 pt-4" />
-
-            {/* Tags */}
-            <div>
-              <div className="flex flex-wrap gap-2 mb-3">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {tags.map((tag) => (
                   <span
                     key={tag}
-                    className="inline-flex items-center gap-1.5 bg-zinc-100 text-zinc-700 text-xs font-medium px-3 py-1 rounded-full"
+                    className="
+                  inline-flex
+                  items-center
+                  gap-2
+                  px-3 py-1.5
+                  rounded-full
+                  text-sm
+                "
+                    style={{
+                      background: "var(--bg-secondary)",
+                      color: "var(--text-primary)",
+                    }}
                   >
                     {tag}
+
                     <button
                       onClick={() => removeTag(tag)}
-                      className="text-[var(--text-secondary)] hover:text-zinc-700"
+                      className="opacity-60 hover:opacity-100"
                     >
-                      <X size={11} />
+                      <X size={12} />
                     </button>
                   </span>
                 ))}
               </div>
+
               <Input
-                placeholder="Add tags (press Enter)... max 5"
+                placeholder="Add tags and press Enter..."
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
                 onKeyDown={addTag}
                 disabled={tags.length >= 5}
-                className="h-10 rounded-xl border-zinc-200 bg-zinc-50 text-sm"
+                className="
+              h-11
+              bg-transparent
+              text-[var(--text-primary)]
+              placeholder:text-[var(--text-muted)]
+            "
+                style={{
+                  borderColor: "var(--border)",
+                }}
               />
-              <p className="text-xs text-[var(--text-secondary)] mt-1.5">
+
+              <p
+                className="mt-3 text-xs"
+                style={{
+                  color: "var(--text-muted)",
+                }}
+              >
                 {tags.length}/5 tags used
               </p>
             </div>
-
           </div>
         )}
-
       </main>
     </AuthGuard>
   )
