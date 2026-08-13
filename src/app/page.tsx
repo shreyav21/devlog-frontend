@@ -9,9 +9,11 @@ import { ScrollReveal } from "@/components/shared/ScrollReveal"
 import { staggerContainer, staggerItem } from "@/lib/animations"
 
 import Spotlight from "@/components/ui/Spotlight"
+import { useAuthStore } from "@/store/authStore"
 
 export default function HomePage() {
   useGSAPHeroAnimation()
+   const { isAuthenticated } = useAuthStore()
 
   return (
     <>
@@ -311,13 +313,13 @@ export default function HomePage() {
         <ScrollReveal>
           <section className="max-w-5xl mx-auto px-6 pb-20">
             <div
-              className="bg-linear-to-br rounded-3xl px-10 py-16 text-center overflow-hidden relative"
+              className="rounded-3xl px-10 py-16 text-center overflow-hidden relative border"
               style={{
                 background:
                   "linear-gradient(135deg,var(--bg-secondary),var(--bg-tertiary))",
+                borderColor: "var(--border)",
               }}
             >
-              {/* Background animation */}
               <motion.div
                 animate={{
                   scale: [1, 1.2, 1],
@@ -328,37 +330,71 @@ export default function HomePage() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="rounded-full px-8 border"
-                style={{
-                  background: "var(--bg-secondary)",
-                  borderColor: "var(--border)",
-                  color: "var(--text-primary)",
-                }}
+                className="absolute inset-0"
               />
 
               <div className="relative z-10">
-                <h2
-                  className="font-serif font-bold text-3xl md:text-4xl mb-4 text-(--text-muted)"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  Ready to start writing?
-                </h2>
-                <p className="text-(--text-secondary) mb-8 max-w-md mx-auto">
-                  Join developers already sharing their knowledge on DevLog.
-                </p>
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="inline-block"
-                >
-                  <Button
-                    asChild
-                    size="lg"
-                    className="bg-white text-zinc-900 hover:bg-zinc-100 rounded-full px-8"
-                  >
-                    <Link href="/auth/register">Create your account</Link>
-                  </Button>
-                </motion.div>
+                {isAuthenticated ? (
+                  <>
+                    <h2
+                      className="font-serif font-bold text-3xl md:text-4xl mb-4"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      Welcome back 👋
+                    </h2>
+
+                    <p className="text-[var(--text-secondary)] mb-8 max-w-md mx-auto">
+                      Ready to publish your next article and share knowledge
+                      with the developer community?
+                    </p>
+
+                    <div className="flex flex-wrap justify-center gap-4">
+                      <Button
+                        asChild
+                        size="lg"
+                        className="rounded-full px-8 bg-white text-zinc-900 hover:bg-zinc-100"
+                      >
+                        <Link href="/write">Write Article</Link>
+                      </Button>
+
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="lg"
+                        className="rounded-full px-8"
+                      >
+                        <Link href="/dashboard">My Dashboard</Link>
+                      </Button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h2
+                      className="font-serif font-bold text-3xl md:text-4xl mb-4"
+                      style={{ color: "var(--text-primary)" }}
+                    >
+                      Ready to start writing?
+                    </h2>
+
+                    <p className="text-[var(--text-secondary)] mb-8 max-w-md mx-auto">
+                      Join developers already sharing their knowledge on DevLog.
+                    </p>
+
+                    <motion.div
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                      className="inline-block"
+                    >
+                      <Button
+                        asChild
+                        size="lg"
+                        className="bg-white text-zinc-900 hover:bg-zinc-100 rounded-full px-8"
+                      >
+                        <Link href="/auth/register">Create your account</Link>
+                      </Button>
+                    </motion.div>
+                  </>
+                )}
               </div>
             </div>
           </section>
